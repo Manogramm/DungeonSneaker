@@ -9,7 +9,28 @@ cover.addEventListener('touchstart', (e) => {
 
 function hideCover() {
   cover.style.display = 'none';
+  document.getElementById("ok").disabled = false;
+  music();
 }
+
+
+
+//KEYBOARD SHORTCUTS
+
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp' && !buttonUp.disabled) moveUp();
+  if (e.key === 'ArrowDown' && !buttonDown.disabled) moveDown();
+  if (e.key === 'ArrowLeft' && !buttonLeft.disabled) moveLeft();
+  if (e.key === 'ArrowRight' && !buttonRight.disabled) moveRight();
+  if (e.key === ' ' && !ok.disabled) okay();
+  if (e.key === 'Enter' && !buttonEndTurn.disabled) endTurn();
+  if (e.key === 'a' && !buttonAttack.disabled) attack();
+  if (e.key === 'd' && !buttonDoor.disabled) door();
+  if (e.key === 'm' && !buttonMagic.disabled) magic();
+  if (e.key === 'u' && !buttonUse.disabled) test();
+  if (e.key === 'c' && !buttonMusic.disabled) music();
+});
 
 
 //MOVEMENT FUNCTIONS
@@ -26,7 +47,7 @@ function moveUp() {
 		m.textContent = "You cannot move anymore!";
 	}else{
 
-		if (hero.positionNumber < 16 || upperField.className == "wall" || upperField.className == "door" || upperField.className == "tunnelvertical" || upperField.className == "tunnelhorizontal" || upperField.className == "forrest"){
+		if (hero.positionNumber < 16 || upperField.className == "wall" || upperField.className == "door" || upperField.className == "tunnelvertical" || upperField.className == "tunnelhorizontal" || upperField.className == "forrest" || upperField.className == "chest"){
 			m.textContent = "You cannot move up!";
 			if(upperField.className == "tunnelvertical"){
 				m.textContent = "Only Goblins can use these small tunnels";	
@@ -36,6 +57,9 @@ function moveUp() {
 					reduceMovement();
 					reduceLife();
 					m.textContent = "You run into the knife? -1 life";
+					if(hero.life < 1){
+						m.textContent = "You just killed yourself...";
+					}
 					let audioMove2 = new Audio('hero-move.mp3');
 					let audioRunIntoTheKnife = new Audio('hero-runIntoTheKnife.mp3');
 					audioMove2.play();
@@ -55,27 +79,30 @@ function moveUp() {
 						m.textContent = "You moved! -1 movement points";
 						let audioMove = new Audio('hero-move.mp3');
 						audioMove.play();
-	
 						reduceMovement();
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)-16;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
 						newField.className = "dead";	
 						m.textContent = "Your lifeless body sinks to the ground...GAME OVER!";
+						m.style.color = "white";
+						m.style.fontWeight = "bold";
+						m.style.textShadow = "2px 2px black";
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber -16;
+					checkView();
 				}
 			}
 	}
@@ -93,7 +120,7 @@ function moveDown() {
 		m.textContent = "You cannot move anymore!";
 	}else{
 
-		if (hero.positionNumber > 111 || lowerField.className == "wall" || lowerField.className == "door" || lowerField.className == "tunnelvertical" || lowerField.className == "tunnelhorizontal" || lowerField.className == "forrest"){
+		if (hero.positionNumber > 111 || lowerField.className == "wall" || lowerField.className == "door" || lowerField.className == "tunnelvertical" || lowerField.className == "tunnelhorizontal" || lowerField.className == "forrest" || lowerField.className == "chest"){
 		m.textContent = "You cannot move down!";
 		if(lowerField.className == "tunnelvertical"){
 			m.textContent = "Only Goblins can use these small tunnels";	
@@ -103,6 +130,9 @@ function moveDown() {
 					reduceMovement();
 					reduceLife();
 					m.textContent = "You run into the knife? -1 life";
+					if(hero.life < 1){
+						m.textContent = "You just killed yourself...";
+					}
 					let audioMove2 = new Audio('hero-move.mp3');
 					let audioRunIntoTheKnife = new Audio('hero-runIntoTheKnife.mp3');
 					audioMove2.play();
@@ -127,22 +157,26 @@ function moveDown() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)+16;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
 						newField.className = "dead";	
 						m.textContent = "Your lifeless body sinks to the ground, GAME OVER!";
+						m.style.color = "white";
+						m.style.fontWeight = "bold";
+						m.style.textShadow = "2px 2px black";
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber +16;
+					checkView();
 				}
 			}
 	}
@@ -160,7 +194,7 @@ function moveLeft() {
 		m.textContent = "You cannot move anymore!";
 	}else{
 
-		if (hero.positionNumber % 16 == 0 || leftField.className == "wall" || leftField.className == "door" || leftField.className == "tunnelhorizontal" || leftField.className == "tunnelvertical" || leftField.className == "forrest"){
+		if (hero.positionNumber % 16 == 0 || leftField.className == "wall" || leftField.className == "door" || leftField.className == "tunnelhorizontal" || leftField.className == "tunnelvertical" || leftField.className == "forrest" || leftField.className == "chest"){
 			m.textContent = "You cannot move to the left!";
 			if(leftField.className == "tunnelhorizontal"){
 				m.textContent = "Only Goblins can use these small tunnels";	
@@ -170,6 +204,9 @@ function moveLeft() {
 					reduceMovement();
 					reduceLife();
 					m.textContent = "You run into the knife? -1 life";
+					if(hero.life < 1){
+						m.textContent = "You just killed yourself...";
+					}
 					let audioMove2 = new Audio('hero-move.mp3');
 					let audioRunIntoTheKnife = new Audio('hero-runIntoTheKnife.mp3');
 					audioMove2.play();
@@ -194,22 +231,26 @@ function moveLeft() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)-1;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
 						newField.className = "dead";	
 						m.textContent = "Your lifeless body sinks to the ground, GAME OVER!";
+						m.style.color = "white";
+						m.style.fontWeight = "bold";
+						m.style.textShadow = "2px 2px black";
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber -1;
+					checkView();
 				}
 			}
 	}
@@ -227,7 +268,7 @@ function moveRight() {
 		m.textContent = "You cannot move anymore!";
 	}else{
 
-		if (hero.positionNumber % 16 == 15 || rightField.className == "wall" || rightField.className == "door" || rightField.className == "tunnelhorizontal" || rightField.className == "tunnelvertical" || rightField.className == "forrest"){
+		if (hero.positionNumber % 16 == 15 || rightField.className == "wall" || rightField.className == "door" || rightField.className == "tunnelhorizontal" || rightField.className == "tunnelvertical" || rightField.className == "forrest" || rightField.className == "chest"){
 			m.textContent = "You cannot move to the right!";
 			if(rightField.className == "tunnelhorizontal"){
 				m.textContent = "Only Goblins can use these small tunnels";	
@@ -237,6 +278,9 @@ function moveRight() {
 					reduceMovement();
 					reduceLife();
 					m.textContent = "You run into the knife? -1 life";
+					if(hero.life < 1){
+						m.textContent = "You just killed yourself...";
+					}
 					let audioMove2 = new Audio('hero-move.mp3');
 					let audioRunIntoTheKnife = new Audio('hero-runIntoTheKnife.mp3');
 					audioMove2.play();
@@ -261,22 +305,26 @@ function moveRight() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)+1;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 4){
+					if(dungeon.mapPointer == 6){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
 						newField.className = "dead";
 						m.textContent = "Your lifeless body sinks to the ground, GAME OVER!";	
+						m.style.color = "white";
+						m.style.fontWeight = "bold";
+						m.style.textShadow = "2px 2px black";
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber +1;
+					checkView();
 				}
 			}
 	}
@@ -369,6 +417,7 @@ const dungeon = {};
 
 	dungeon.mapPointer = 1;
 	dungeon.doorPosition = 110;
+	dungeon.doorPosition2 = 0;
 	dungeon.reserveFieldPosition = [0,0,0,0,0,0];
 
 	dungeon.fakeEndTurn = false;
@@ -448,6 +497,9 @@ function teleport(){
 		let randomFieldId = heroId;
 		let randomField = document.getElementById(randomFieldId);
 		failureCounter = 1;
+		//if(dungeon.mapPointer == 6?)
+		//	failureCounter = 130;
+		//}
 		while (obstacle == true && failureCounter < 128){
 			let diceNumber = rollDice();
 			teleportNumber = diceNumber * (hero.positionNumber+1) % 127;
@@ -468,11 +520,14 @@ function teleport(){
 				failureCounter = failureCounter +1;
 			}
 		}
-		oldField.className = "light";
-		randomField.className = "hero";
-		if(failureCounter > 127){
+
+if(failureCounter > 127){
 			m.textContent = "The teleport spell failed this time!";
+			let audioFailedSpell = new Audio('boing.mp3');
+			audioFailedSpell.play();
 		}else{
+			oldField.className = "light";
+			randomField.className = "hero";
 			m.textContent = "You teleported yourself, -2 mana";
 			hero.audioTeleport.play();
 			hero.positionNumber = teleportNumber;
@@ -579,6 +634,7 @@ function attack(){
 				}
 				eliminate(index);
 			}
+			checkView();
 			dungeon.heroActions = dungeon.heroActions -1;
 			if (dungeon.heroActions < 1 && dungeon.heroMovement <1){
 				deactivateButtons();
@@ -620,36 +676,69 @@ function door(){
 			case 1:
 			mapBuilder2();
 			dungeon.mapPointer = 2;
+			dungeon.view = "backgroundClean.gif";
 			let p = document.getElementById("view");
 			p.src = dungeon.view;
+			checkView();
 			break;
 
 			case 2:
 			mapBuilder3();
 			dungeon.mapPointer = 3;
+			checkView();
 			break;
 
 			case 3:
 			mapBuilder4();
 			dungeon.mapPointer = 4;
-			let p4 = document.getElementById("view");
-			p4.src = "backgroundDark.gif";
+			checkView();
 			break;
 
 			case 4:
 			mapBuilder5();
 			dungeon.mapPointer = 5;
+			checkView();
 			break;
 			
 			case 5:
 			mapBuilder6();
 			dungeon.mapPointer = 6;
+			let p4 = document.getElementById("view");
+			p4.src = "backgroundDark.gif";
+			checkView();
 			break;
 		}
 	}else{
 		m.textContent = "You cannot open any door right now!";
+		if (hero.positionNumber == dungeon.doorPosition2 && dungeon.heroActions > 0){
+			m.textContent = "You entered the next room!";
+			secretDoor();	
+		}	
 	}
 };
+
+
+/*
+function secretDoor(){
+	dungeon.audioDoorWood.play();
+	switch(dungeon.mapPointer) {
+			case 3:
+			mapBuilder91();
+			dungeon.mapPointer = 91;
+			break;
+
+			case 94:
+			mapBuilder81();
+			dungeon.mapPointer = 81;
+			break;
+
+			case 6:
+			mapBuilder71();
+			dungeon.mapPointer = 71;
+			break;
+	}
+};
+*/
 
 
 //HELP MAP TO NAVIGATE MOVEMENTS ETC. AFTER THE REAL MAPS ARE LOADED
@@ -687,16 +776,34 @@ dungeon.map2 = ["wall","wall","wall","wall","wall","wall","wall","wall","wall","
 "wall","wall","light","light","light","light","light","light","light","light","light","gravel","gravel","wall","wall","wall",
 "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall","wall","wall"]
 
-dungeon.map3 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+dungeon.map3 = ["wall","hero","wall","wall","wall","wall","wall","door","wall","wall","wall","wall","wall","wall","wall","wall",
+"wall","light","light","light","light","wall","wall","gravel","gravel","gravel","gravel","gravel","gravel","light","wall","wall",
+"wall","light","light","light","light","light","wall","wall","wall","wall","wall","wall","wall","light","wall","wall",
+"wall","wall","light","light","light","light","light","light","light","light","light","light","light","light","wall","wall",
+"wall","wall","wall","wall","irongate","irongate","wall","sack","wall","light","wall","light","light","light","wall","wall",
+"wall","gravel","chest","light","light","light","wall","sack","wall","light","wall","wall","light","light","light","wall",
+"wall","gravel","gravel","light","light","light","wall","chest","wall","light","wall","wall","wall","light","chest","wall",
+"wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall","wall","wall","wall","wall","wall"]
+
+dungeon.map4 = ["wall","wall","tunnelvertical","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+"wall","table","light","light","chest","wall","light","light","light","tunnelhorizontal","light","light","chest","wall","chest","wall",
+"wall","wall","wall","light","wall","wall","light","wall","wall","wall","wall","light","wall","wall","light","wall",
+"wall","table","light","light","light","tunnelhorizontal","light","light","light","chest","wall","irongate","wall","wall","irongate","wall",
+"wall","wall","wall","wall","irongate","wall","irongate","wall","wall","wall","wall","light","light","light","light","wall",
+"wall","light","light","light","light","light","light","sewer","light","light","light","light","light","light","light","wall",
+"tunnelhorizontal","light","light","light","sack","sack","sack","light","light","light","light","light","light","sack","light","wall",
+"wall","wall","wall","wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","door","wall","wall"]
+
+dungeon.map5 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
 "wall","light","light","light","light","light","light","tunnelhorizontal","light","light","light","wall","light","light","light","wall",
-"wall","light","light","light","light","light","light","wall","light","light","light","light","light","light","light","wall",
-"wall","light","light","light","light","light","light","wall","light","light","light","light","light","light","wall","wall",
+"wall","light","light","light","table","light","light","wall","light","light","light","light","light","light","light","wall",
+"wall","light","light","light","light","light","gravel","wall","light","light","light","light","light","light","wall","wall",
 "wall","light","light","wall","wall","wall","wall","wall","light","light","light","light","light","light","wall","wall",
 "wall","light","light","light","light","wall","light","light","light","light","light","light","light","light","light","wall",
-"wall","light","light","light","light","light","light","wall","light","light","light","wall","light","light","light","wall",
+"wall","light","light","light","light","gravel","light","wall","light","light","light","wall","light","light","light","wall",
 "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall"]
 
-dungeon.map4 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall",
+dungeon.map6 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall",
 "darkWall","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
 "darkWall","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
 "heroDark","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
@@ -735,6 +842,7 @@ function mapBuilder2(){
 	dungeon.doorPosition = 108;
 	const goblin1 = new GoblinArcher(999);
 	dungeon.monsterList.push(goblin1);
+
 };
 
 function mapBuilder3(){
@@ -743,24 +851,68 @@ function mapBuilder3(){
 		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
 	}
 	dungeon.monsterList = [];
-	hero.positionNumber = 2;
+	hero.positionNumber = 1;
 	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
 	dungeon.reserveFieldPosition[0] = 2;
-	dungeon.reserveFieldPosition[5] = 3;
+	dungeon.reserveFieldPosition[1] = 3;
 
 	for(i=0;i<128;i++){
 		let currentFieldId = helpMap.fields[i];
 		let currentField = document.getElementById(currentFieldId);
 		currentField.className = dungeon.map3[i];
 	}
-	dungeon.doorPosition = 110;
+	dungeon.doorPosition = 23;
+	dungeon.doorPosition2 = 104;
+};
+
+function mapBuilder4(){
+	if(dungeon.monsterList.length > 0 || dungeon.reserveMonsterList > 0){
+		dungeon.monsterComingAfterYouCounter = 4;
+		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
+	}
+	dungeon.monsterList = [];
+	hero.positionNumber = 117;
+	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
+	dungeon.reserveFieldPosition[0] = 97;
+	dungeon.reserveFieldPosition[1] = 18;
+
+	for(i=0;i<128;i++){
+		let currentFieldId = helpMap.fields[i];
+		let currentField = document.getElementById(currentFieldId);
+		currentField.className = dungeon.map4[i];
+	}
+	dungeon.doorPosition = 109;
 	const goblin2 = new Goblin(999);
 	dungeon.monsterList.push(goblin2);
+	const goblin3 = new Goblin(999);
+	dungeon.monsterList.push(goblin3);
+};
+
+function mapBuilder5(){
+	if(dungeon.monsterList.length > 0 || dungeon.reserveMonsterList > 0){
+		dungeon.monsterComingAfterYouCounter = 4;
+		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
+	}
+	dungeon.monsterList = [];
+	hero.positionNumber = 2;
+	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
+	dungeon.reserveFieldPosition[0] = 2;
+	dungeon.reserveFieldPosition[1] = 3;
+	dungeon.reserveFieldPosition[2] = 1;
+
+	for(i=0;i<128;i++){
+		let currentFieldId = helpMap.fields[i];
+		let currentField = document.getElementById(currentFieldId);
+		currentField.className = dungeon.map5[i];
+	}
+	dungeon.doorPosition = 110;
+	const goblin4 = new Goblin(999);
+	dungeon.monsterList.push(goblin4);
 	const lich1 = new Lich(93);
 	dungeon.monsterList.push(lich1);
 };
 
-function mapBuilder4(){
+function mapBuilder6(){
 
 	dungeon.monsterComingAfterYouCounter = 0;
 	dungeon.reserveMonsterList = [];
@@ -771,7 +923,7 @@ function mapBuilder4(){
 	for(i=0;i<128;i++){
 		let currentFieldId = helpMap.fields[i];
 		let currentField = document.getElementById(currentFieldId);
-		currentField.className = dungeon.map4[i];
+		currentField.className = dungeon.map6[i];
 	}
 	dungeon.doorPosition = 125;
 	const shadow1 = new Shadow(22);
@@ -803,6 +955,7 @@ function pushReserveList(){
 			}
 		}
 	}
+	dungeon.reserveMonsterList = [];
 };
 
 
@@ -864,8 +1017,13 @@ function reduceLife() {
 	m.textContent = "You got hit! -1 life";
 	if (hero.life < 1){
 		m.textContent = "GAME OVER";
+		m.style.color = "white";
+		m.style.fontWeight = "bold";
+		m.style.textShadow = "2px 2px black";
+		let p9 = document.getElementById("view");
+		p9.src = "BackgroundDeadRed.png";
 		let p = document.getElementById("portrait");
-		p.src = "characterPortraitSmallDead.gif";
+		p.src = "characterPortraitSmallDeadRed.png";
 		let heroId = helpMap.heroPosition;
 		let deadField = document.getElementById(heroId);
 		deadField.className = "dead";
@@ -883,6 +1041,23 @@ function reduceLife() {
 		document.getElementById("buttonEndTurn").disabled = true;
 		document.getElementById("ok").disabled = true;
 		document.querySelector('.quodrant2').style.backgroundImage = "url('characterBackgroundRed.png')";
+		document.querySelector('.quodrant4').style.backgroundImage = "url('backgroundActionsRed.png')";
+		document.querySelector('.quodrant5').style.backgroundImage = "url('backgroundMessagesRed.png')";
+		document.getElementById('overlay').style.display = 'block'; 
+		let text = "";
+		let mana = document.getElementById("mana");
+		mana.textContent = text;
+		let strength = document.getElementById("strength");
+		strength.textContent = text;
+		let movement = document.getElementById("movement");
+		movement.textContent = text;
+		let weapon = document.getElementById("weapon");
+		weapon.textContent = text;
+		let armor = document.getElementById("armor");
+		armor.textContent = text;
+		let spell = document.getElementById("spell");
+		spell.textContent = text;
+		document.querySelectorAll('button').forEach(button => {button.style.backgroundColor = '#7A190A'});
 	}
 	return;	
 };
@@ -894,6 +1069,104 @@ function reduceMana(amount) {
 	mana.textContent = text.repeat(newMana);
 	hero.Mana = newMana;
 	return;	
+};
+
+
+
+function checkView(){
+
+	let u = "light";
+	let r = "light";
+	let d = "light";
+	let l = "light";
+
+	if(hero.positionNumber > 15){
+        	u = document.getElementById(helpMap.fields[hero.positionNumber-16]).className;
+	}
+	if(hero.positionNumber % 16 < 15){	
+		r = document.getElementById(helpMap.fields[hero.positionNumber+1]).className;
+	}
+	if(hero.positionNumber < 112){
+		d = document.getElementById(helpMap.fields[hero.positionNumber+16]).className;
+	}
+	if(hero.positionNumber % 16 > 0){
+		l = document.getElementById(helpMap.fields[hero.positionNumber-1]).className;
+	}
+
+	let uninterestingFields = ["light", "dark", "gravel", "sack", "blind", "darkWall", "wall", "forrest", "goblinDead", "lichDead"];
+
+	if(u == "lich"){
+		changeView(u);
+		return;
+	}
+	if(r == "lich"){
+		changeView(r);
+		return;
+	}
+	if(d == "lich"){
+		changeView(d);
+		return;
+	}
+	if(l == "lich"){
+		changeView(l);
+		return;
+	}
+	if(u == "goblin" || u == "goblinArcher"){
+		changeView(u);
+		return;
+	}
+	if(r == "goblin" || r == "goblinArcher"){
+		changeView(r);
+		return;
+	}
+	if(d == "goblin" || d == "goblinArcher"){
+		changeView(d);
+		return;
+	}
+	if(l == "goblin" || l == "goblinArcher"){
+		changeView(l);
+		return;
+	}
+	if(uninterestingFields.includes(u) == false){
+		changeView(u);
+		return;
+	}
+	if(uninterestingFields.includes(r) == false){
+		changeView(r);
+		return;
+	}
+	if(uninterestingFields.includes(d) == false){
+		changeView(d);
+		return;
+	}
+	if(uninterestingFields.includes(l) == false){
+		changeView(l);
+		return;
+	}
+	dungeon.viewAltered = false;
+	let p = document.getElementById("view");
+	p.src = dungeon.view;
+	return;
+};
+
+function changeView(object){
+	let p = document.getElementById("view");
+
+	switch(object) {
+		case "lich":
+    			p.src = "lich-image-bnw.gif";
+			break;
+		case "goblin":
+    			p.src = "view-goblin.gif";
+			break;
+		case "goblinArcher":
+    			p.src = "view-goblinArcher.gif";
+			break;
+		case "door":
+    			p.src = "characterBackground2.gif";
+			break;
+	}
+	dungeon.viewAltered = true;
 };
 
 
@@ -938,9 +1211,9 @@ function okay(){
 		activateButtons();
 		let n = document.getElementById("message");
 		n.textContent = "Welcome!";
-		music();
 		let p2 = document.getElementById("view");
 		p2.src = "backgroundOutside.gif";
+		dungeon.view = "backgroundOutside.gif";
 		return;
 	}
 
@@ -958,6 +1231,7 @@ function okay(){
 		dungeon.viewAltered = false;
 		let p = document.getElementById("view");
 		p.src = dungeon.view;
+		checkView();
 	}
 
 	if(dungeon.checkPoint1 == true){
@@ -1499,6 +1773,9 @@ function goblinAttack(){
 				m.textContent = attacker.name + " hit you! -"+ lifeLost + " life";
 				dungeon.audioGoblinHit.play();
 				dungeon.audioGoblinHit2.play();
+				let p3 = document.getElementById("view");
+				p3.src = "attacking-goblin.gif";
+				dungeon.viewAltered = true;
 				for(i=1; i < lifeLost + 1; i++){
 					reduceLife();
 				}
@@ -1512,9 +1789,6 @@ function goblinAttack(){
 					dungeon.audioGoblinHit.play();
 					dungeon.audioGoblinHit2.play();
 				}
-				let p3 = document.getElementById("view");
-				p3.src = "attacking-goblin.gif";
-				dungeon.viewAltered = true;
 			}
 		}else{
 			m.textContent = attacker.name + " attacked but missed you!";
@@ -1599,8 +1873,11 @@ function lichMove() {
 		reduceLife();
 		shitField.className = "lich";
 		let p = document.getElementById("portrait");
-		p.src = "characterPortraitSmallConsumed.gif";
+		p.src = "characterPortraitSmallConsumedRed.png";
 		m4.textContent = movingLich.name + "s ethereal aura erased you...Game Over!";
+		m4.style.color = "white";
+		m4.style.fontWeight = "bold";
+		m4.style.textShadow = "2px 2px black";
 		let p2 = document.getElementById("view");
 		p2.src = "lich-image-bnwDeathMove.gif";
 		dungeon.viewAltered = true;
@@ -1662,8 +1939,11 @@ function lichAttack(){
 		reduceLife();
 		if(hero.life < 1){
 			m.textContent = attacker.name + "s magic bolt killed you, GAME OVER!";
+			m.style.color = "white";
+			m.style.fontWeight = "bold";
+			m.style.textShadow = "2px 2px black";
 			let p3 = document.getElementById("view");
-			p3.src = "lich-image-bnwMagicBolt.gif";
+			p3.src = "BackgroundDeadRed.png";
 			dungeon.viewAltered = true;
 			dungeon.audioLichMagicBolt.play();
 		}else{
@@ -1944,6 +2224,9 @@ function shadowAttack(){
 		let p = document.getElementById("portrait");
 		p.src = "characterPortraitSmallConsumed.gif";
 		m.textContent = "The maw of darkness opens before you...Game Over!";
+		m.style.color = "white";
+		m.style.fontWeight = "bold";
+		m.style.textShadow = "2px 2px black";
 		let p2 = document.getElementById("view");
 		p2.src = "attackingShadows.gif";
 		dungeon.viewAltered = true;

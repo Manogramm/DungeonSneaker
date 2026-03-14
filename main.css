@@ -165,62 +165,92 @@ blockquote{
 
 .chess-board .light { 
 	background: url("dungeon-floortile.gif");
-	background-size: 100%; 
+	background-size: 100% 100%; 
 }
 
 .chess-board .dark { 
 	background: url("dungeon-floortileDark.gif");
-	background-size: 100%; 
+	background-size: 100% 100%; 
 }
 
 .chess-board .gravel { 
 	background: url("dungeon-floortileGravel.gif");
-	background-size: 100%; 
+	background-size: 100% 100%; 
+	background-repeat: no-repeat;
+}
+
+.chess-board .sewer { 
+	background: url("dungeon-sewer.gif");
+	background-size: 100% 100%; 
+	background-repeat: no-repeat;
+}
+
+.chess-board .table { 
+	background: url("dungeon-tabletile.gif");
+	background-size: 100% 100%; 
+	background-repeat: no-repeat;
 }
 
 .chess-board .sack { 
 	background: url("dungeon-floortileSack.gif");
-	background-size: 100%; 
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
 }
 
 .chess-board .blind { 
 	background: url("dungeon-darkness-floortile.gif");
-	background-size: 100%; 
+	background-size: 100% 100%; 
 }
 
 .chess-board .darkWall { 
 	background: url("dungeon-darkness-floortile.gif");
-	background-size: 100%; 
+	background-size: 100% 100%; 
 }
 
 .chess-board .wall { 
 	background: url("dungeon-walltile.gif");
-	background-size: 100%;
+	background-size: 100% 100%;
 }
 
 .chess-board .forrest { 
 	background: url("dungeon-forresttile.gif");
-	background-size: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .chess-board .tunnelhorizontal { 
 	background: url("dungeon-goblintunneltilehorizontal.gif");
-	background-size: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .chess-board .tunnelvertical{ 
 	background: url("dungeon-goblintunneltilevertical.gif");
-	background-size: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .chess-board .door { 
 	background: url("dungeon-doortile.gif");
-	background-size: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .irongate { 
+	background: url("dungeon-irongatetile.gif");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .chest { 
+	background: url("dungeon-chesttile.gif");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .chess-board .hero { 
 	background: url("hero.gif"); 
-	background-size: 100%;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-position: center;
  
@@ -228,7 +258,7 @@ blockquote{
 
 .chess-board .heroDark { 
 	background: url("heroDark.gif"); 
-	background-size: 100%;
+	background-size: 100% 100%;
 	background-repeat: repeat;
 	background-position: center;
  
@@ -236,7 +266,7 @@ blockquote{
 
 .chess-board .dead { 
 	background: url("dead.gif"); 
-	background-size: 100%;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-position: center;
  
@@ -244,42 +274,42 @@ blockquote{
 
 .chess-board .goblin { 
 	background: url("goblin.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
 }
 
 .chess-board .goblinArcher { 
 	background: url("goblinArcher.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
 }
 
 .chess-board .goblinDead { 
 	background: url("goblinDead.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
 }
 
 .chess-board .lich { 
 	background: url("lich.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
 }
 
 .chess-board .lichDead { 
 	background: url("lichDead.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
 }
 
 .chess-board .shadow { 
 	background: url("shadow.gif"); 
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	background-repeat: repeat; 
 	background-position: center;
 }

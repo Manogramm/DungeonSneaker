@@ -37,20 +37,32 @@
 		<blockquote id="movement" style="color: White; 
 				text-shadow:-2px -2px 0px #000,0px -2px 0px #000,2px -2px 0px #000,-2px  0px 0px #000,2px  0px 0px #000,-2px  2px 0px 
 				#000,0px  2px 0px #000,2px  2px 0px #000;">&#9679 &#9679 &#9679 &#9679 &#9679 &#9679  </blockquote>
-		<blockquote style="color: DarkSlateGray; 
+		<blockquote id="strength" style="color: DarkSlateGray; 
 				text-shadow:-2px -2px 0px #000,0px -2px 0px #000,2px -2px 0px #000,-2px  0px 0px #000,2px  0px 0px #000,-2px  2px 0px 
 				#000,0px  2px 0px #000,2px  2px 0px #000;">&#9679 &#9679 &#9679  </blockquote>
 		<blockquote id="mana" style="color: DodgerBlue; 
 				text-shadow:-2px -2px 0px #000,0px -2px 0px #000,2px -2px 0px #000,-2px  0px 0px #000,2px  0px 0px #000,-2px  2px 0px 
 				#000,0px  2px 0px #000,2px  2px 0px #000;">&#9679 &#9679 &#9679</blockquote>
-		<blockquote>Broad Sword (+4)</blockquote>
-		<blockquote>Chainmail (+2)</blockquote>
-  		<blockquote style="padding-bottom: 20px;">Teleport</blockquote>
+		<blockquote id="weapon">Broad Sword (+4)</blockquote>
+		<blockquote id="armor">Chainmail (+2)</blockquote>
+  		<blockquote id="spell" style="padding-bottom: 20px;">Teleport</blockquote>
 			</td>
 		</table>
 
 	</div>
     </div>
+
+<div id="overlay" style="
+  position: absolute;
+  top: 50vh; left: 0;
+  width: 50%;
+  height: 50vh;
+  background-image: url('backgroundFieldsRedOverlay.png');
+  background-size: 100%;
+  opacity: 0.4;
+  display: none;
+"></div>
+
     <div class='qbottom'>
         <div class='quodrant3'>
 	<table class="chess-board">
@@ -245,7 +257,7 @@
 			<p  id="message" style="font-family: Lucida Console, Curier New, monospace; font-size: 100%; font-weight: bold; position: absolute; top: 88.5%; left: 54%; width: 400px; height: 45px;">press OK to proceed!</p>
 		</div>
 		<div class="OK">
-			<button type="button" enabled id="ok" onclick="okay()" style="position: absolute; top: 88.5%; left: 88%; width: 70px; height: 50px; background-color: #DEB887;">OK</button>
+			<button type="button" disabled id="ok" onclick="okay()" style="position: absolute; top: 88.5%; left: 88%; width: 70px; height: 50px; background-color: #DEB887;">OK</button>
 		</div>
 	</div>
     </div>
