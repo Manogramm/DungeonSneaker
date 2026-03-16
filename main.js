@@ -353,7 +353,17 @@ function test(){
 
 
 function music(){
+	if(dungeon.lichMusic == true){
+		musicLich();
+		return;
+	}
+
 	switch(dungeon.music) {
+		case 0:
+			dungeon.audio1.play();
+			dungeon.audio1.loop=true;
+			dungeon.music = dungeon.music +2;
+			break;
 		case 1:
 			dungeon.audio1.play();
 			dungeon.audio1.loop=true;
@@ -389,6 +399,22 @@ function music(){
 	return;
 };
 
+function musicLich(){
+	switch(dungeon.music) {
+	case 1:
+		dungeon.audioEndBossLich.play();
+		dungeon.audioEndBossLich.loop=true;
+		dungeon.music = dungeon.music +1;
+		break;
+	case 2:
+		dungeon.audioEndBossLich.pause();
+		dungeon.audioEndBossLich.currentTime = 0;
+		dungeon.music = 1;
+		break;
+	}
+	return;
+};
+
 
 //DUNGEON OBJECT HOLDING GENERAL STATUS INFORMATION AND HANDLING MAP AND GAME CHANGES
 
@@ -406,6 +432,8 @@ const dungeon = {};
 	dungeon.intro = true;
 	dungeon.monsterComingAfterYouCounter = 0;     //if monsterReserveList is not empty when entering a new room, this counter will be set to 4
 	dungeon.music = 1;
+	dungeon.musicReserve = 999;
+	dungeon.lichMusic = false;
 
 	dungeon.audio1 = new Audio('1.mp3');
 	dungeon.audio2 = new Audio('2.mp3');
@@ -414,6 +442,7 @@ const dungeon = {};
 	dungeon.audio5 = new Audio('5.mp3');
 	dungeon.audio6 = new Audio('6.mp3');
 	dungeon.audio7 = new Audio('7.mp3');
+	dungeon.audioEndBossLich = new Audio('EndBossLich.m4a');
 
 	dungeon.mapPointer = 1;
 	dungeon.doorPosition = 110;
@@ -438,6 +467,7 @@ const dungeon = {};
 	dungeon.audioLichTelekinesis = new Audio('lich-telekinesis.mp3');
 	dungeon.audioLichMagicBolt = new Audio('lich-magicBolt.mp3');
 	dungeon.audioLichMisses = new Audio('lich-misses.mp3');
+	dungeon.audioLichLaugh = new Audio('lichLaugh.mp3');
 
 	dungeon.audioDoorWood = new Audio('door-wood.mp3');
 	dungeon.audioDead = new Audio('dead.mp3');
@@ -631,6 +661,11 @@ function attack(){
 					emptyEnemyField.className = "goblinDead";
 				}else{
 					emptyEnemyField.className = "lichDead";
+					dungeon.audioEndBossLich.pause();
+					dungeon.audioEndBossLich.currentTime = 0;
+					dungeon.lichMusic = false;
+					dungeon.music = dungeon.musicReserve;
+					music();
 				}
 				eliminate(index);
 			}
@@ -798,9 +833,9 @@ dungeon.map5 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","
 "wall","light","light","light","light","light","light","tunnelhorizontal","light","light","light","wall","light","light","light","wall",
 "wall","light","light","light","table","light","light","wall","light","light","light","light","light","light","light","wall",
 "wall","light","light","light","light","light","gravel","wall","light","light","light","light","light","light","wall","wall",
-"wall","light","light","wall","wall","wall","wall","wall","light","light","light","light","light","light","wall","wall",
-"wall","light","light","light","light","wall","light","light","light","light","light","light","light","light","light","wall",
-"wall","light","light","light","light","gravel","light","wall","light","light","light","wall","light","light","light","wall",
+"wall","light","light","wall","wall","wall","wall","wall","light","light","light","light","pentagram1","pentagram2","wall","wall",
+"wall","light","light","light","light","wall","light","light","light","light","light","light","pentagram4","light","pentagram6","wall",
+"wall","light","light","light","light","gravel","light","wall","light","light","light","wall","pentagram7","pentagram8","pentagram9","wall",
 "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall"]
 
 dungeon.map6 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall",
@@ -910,6 +945,24 @@ function mapBuilder5(){
 	dungeon.monsterList.push(goblin4);
 	const lich1 = new Lich(93);
 	dungeon.monsterList.push(lich1);
+
+	dungeon.audioLichLaugh.play();
+	let m = document.getElementById("message");
+	m.textContent = "OH NO!...the lich!";
+
+	if(dungeon.music > 1){
+		dungeon.audio1.pause();
+		dungeon.audio2.pause();
+		dungeon.audio3.pause();
+		dungeon.audio4.pause();
+		dungeon.musicReserve = dungeon.music -1;
+		dungeon.music = 1;
+	}
+	dungeon.musicReserve = 5;
+	dungeon.lichMusic = true;
+	musicLich();
+		
+
 };
 
 function mapBuilder6(){
@@ -932,6 +985,8 @@ function mapBuilder6(){
 	dungeon.monsterList.push(shadow2);
 	const shadow3 = new Shadow(117);
 	dungeon.monsterList.push(shadow3);
+
+	
 };
 
 
@@ -1034,6 +1089,7 @@ function reduceLife() {
 			dungeon.audio5.pause();
 			dungeon.audio6.pause();
 			dungeon.audio7.pause();
+			dungeon.audioEndBossLich.pause();
 			document.getElementById("buttonMusic").disabled = true;
 			dungeon.audioDead.play();
 			
