@@ -248,6 +248,48 @@ blockquote{
 	background-repeat: no-repeat;
 }
 
+.chess-board .pentagram1 { 
+	background: url("dungeon-floortilePentagram1.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram2 { 
+	background: url("dungeon-floortilePentagram2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram4 { 
+	background: url("dungeon-floortilePentagram4.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram6 { 
+	background: url("dungeon-floortilePentagram6.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram7 { 
+	background: url("dungeon-floortilePentagram7.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram8 { 
+	background: url("dungeon-floortilePentagram8.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.chess-board .pentagram9 { 
+	background: url("dungeon-floortilePentagram9.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
 .chess-board .hero { 
 	background: url("hero.gif"); 
 	background-size: 100% 100%;
