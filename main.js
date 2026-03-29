@@ -10,7 +10,7 @@ cover.addEventListener('touchstart', (e) => {
 function hideCover() {
   cover.style.display = 'none';
   document.getElementById("ok").disabled = false;
-  music();
+  dungeon.audioIntro.play();
 }
 
 
@@ -83,14 +83,14 @@ function moveUp() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)-16;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
@@ -157,14 +157,14 @@ function moveDown() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)+16;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
@@ -231,14 +231,14 @@ function moveLeft() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)-1;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
@@ -305,14 +305,14 @@ function moveRight() {
 					}
 					let oldField = document.getElementById(heroId);
 					oldField.className = "light";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						oldField.className = "blind";
 					}
 					let x = helpMap.fields.indexOf(helpMap.heroPosition)+1;
 					heroId = helpMap.fields[x];
 					let newField = document.getElementById(heroId);
 					newField.className = "hero";
-					if(dungeon.mapPointer == 6){
+					if(dungeon.mapPointer == 8){
 						newField.className = "heroDark";
 					}
 					if(hero.life == 0){
@@ -439,9 +439,7 @@ const dungeon = {};
 	dungeon.audio2 = new Audio('2.mp3');
 	dungeon.audio3 = new Audio('3.mp3');
 	dungeon.audio4 = new Audio('4.mp3');
-	dungeon.audio5 = new Audio('5.mp3');
-	dungeon.audio6 = new Audio('6.mp3');
-	dungeon.audio7 = new Audio('7.mp3');
+	dungeon.audioIntro = new Audio('intro.mp3');
 	dungeon.audioEndBossLich = new Audio('EndBossLich.m4a');
 
 	dungeon.mapPointer = 1;
@@ -734,10 +732,22 @@ function door(){
 			dungeon.mapPointer = 5;
 			checkView();
 			break;
-			
+
 			case 5:
 			mapBuilder6();
 			dungeon.mapPointer = 6;
+			checkView();
+			break;
+			
+			case 6:
+			mapBuilder7();
+			dungeon.mapPointer = 7;
+			checkView();
+			break;
+
+			case 7:
+			mapBuilder8();
+			dungeon.mapPointer = 8;
 			let p4 = document.getElementById("view");
 			p4.src = "backgroundDark.gif";
 			checkView();
@@ -820,7 +830,25 @@ dungeon.map3 = ["wall","hero","wall","wall","wall","wall","wall","door","wall","
 "wall","gravel","gravel","light","light","light","wall","chest","wall","light","wall","wall","wall","light","chest","wall",
 "wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall","wall","wall","wall","wall","wall"]
 
-dungeon.map4 = ["wall","wall","tunnelvertical","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+dungeon.map4 = ["wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+  "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+  "wall","wall","wall","light","light","light","wall","light","light","light","light","light","light","light","wall","wall",
+  "wall","wall","light","light","light","light","light","light","light","wall","wall","wall","light","light","light","wall",
+  "wall","light","light","light","chest","light","light","light","light","light","door","wall","light","light","light","wall",
+  "wall","wall","light","light","light","light","light","light","light","wall","wall","wall","light","goblinDead","light","wall",
+  "wall","wall","wall","light","light","light","wall","light","light","light","light","light","light","light","wall","wall",
+  "wall","wall","wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall"]
+
+dungeon.map5 = [ "light","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall","wall",
+  "wall","light","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","light","wall","wall",
+  "wall","wall","light","wall","wall","wall","wall","wall","wall","wall","wall","wall","light","light","wall","wall",
+  "wall","wall","hero","light","light","light","light","light","light","light","light","light","light","gravel","wall","wall",
+  "wall","wall","wall","light","light","light","light","light","gravel","light","light","light","light","wall","wall","wall",
+  "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+  "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+  "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall"]
+
+dungeon.map6 = ["wall","wall","tunnelvertical","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
 "wall","table","light","light","chest","wall","light","light","light","tunnelhorizontal","light","light","chest","wall","chest","wall",
 "wall","wall","wall","light","wall","wall","light","wall","wall","wall","wall","light","wall","wall","light","wall",
 "wall","table","light","light","light","tunnelhorizontal","light","light","light","chest","wall","irongate","wall","wall","irongate","wall",
@@ -829,7 +857,7 @@ dungeon.map4 = ["wall","wall","tunnelvertical","wall","wall","wall","wall","wall
 "tunnelhorizontal","light","light","light","sack","sack","sack","light","light","light","light","light","light","sack","light","wall",
 "wall","wall","wall","wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","door","wall","wall"]
 
-dungeon.map5 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
+dungeon.map7 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall",
 "wall","light","light","light","light","light","light","tunnelhorizontal","light","light","light","wall","light","light","light","wall",
 "wall","light","light","light","table","light","light","wall","light","light","light","light","light","light","light","wall",
 "wall","light","light","light","light","light","gravel","wall","light","light","light","light","light","light","wall","wall",
@@ -838,7 +866,7 @@ dungeon.map5 = ["wall","wall","hero","wall","wall","wall","wall","wall","wall","
 "wall","light","light","light","light","gravel","light","wall","light","light","light","wall","pentagram7","pentagram8","pentagram9","wall",
 "wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","wall","door","wall"]
 
-dungeon.map6 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall",
+dungeon.map8 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall","darkWall",
 "darkWall","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
 "darkWall","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
 "heroDark","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","blind","darkWall",
@@ -851,6 +879,8 @@ dungeon.map6 = ["darkWall","darkWall","darkWall","darkWall","darkWall","darkWall
 
 function mapBuilder1(){	
 
+	dungeon.audioIntro.pause();
+	music();
 	dungeon.monsterList = [];
 	hero.positionNumber = 52;
 	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
@@ -906,6 +936,42 @@ function mapBuilder4(){
 		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
 	}
 	dungeon.monsterList = [];
+	hero.positionNumber = 116;
+	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
+	dungeon.reserveFieldPosition[0] = 116;
+
+	for(i=0;i<128;i++){
+		let currentFieldId = helpMap.fields[i];
+		let currentField = document.getElementById(currentFieldId);
+		currentField.className = dungeon.map4[i];
+	}
+	dungeon.doorPosition = 73;
+};
+
+function mapBuilder5(){
+	if(dungeon.monsterList.length > 0 || dungeon.reserveMonsterList > 0){
+		dungeon.monsterComingAfterYouCounter = 4;
+		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
+	}
+	dungeon.monsterList = [];
+	hero.positionNumber = 50;
+	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
+	dungeon.reserveFieldPosition[0] = 50;
+
+	for(i=0;i<128;i++){
+		let currentFieldId = helpMap.fields[i];
+		let currentField = document.getElementById(currentFieldId);
+		currentField.className = dungeon.map5[i];
+	}
+	dungeon.doorPosition = 29;
+};
+
+function mapBuilder6(){
+	if(dungeon.monsterList.length > 0 || dungeon.reserveMonsterList > 0){
+		dungeon.monsterComingAfterYouCounter = 4;
+		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
+	}
+	dungeon.monsterList = [];
 	hero.positionNumber = 117;
 	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
 	dungeon.reserveFieldPosition[0] = 97;
@@ -914,7 +980,7 @@ function mapBuilder4(){
 	for(i=0;i<128;i++){
 		let currentFieldId = helpMap.fields[i];
 		let currentField = document.getElementById(currentFieldId);
-		currentField.className = dungeon.map4[i];
+		currentField.className = dungeon.map6[i];
 	}
 	dungeon.doorPosition = 109;
 	const goblin2 = new Goblin(999);
@@ -923,7 +989,7 @@ function mapBuilder4(){
 	dungeon.monsterList.push(goblin3);
 };
 
-function mapBuilder5(){
+function mapBuilder7(){
 	if(dungeon.monsterList.length > 0 || dungeon.reserveMonsterList > 0){
 		dungeon.monsterComingAfterYouCounter = 4;
 		dungeon.reserveMonsterList = dungeon.monsterList.concat(dungeon.reserveMonsterList);
@@ -938,7 +1004,7 @@ function mapBuilder5(){
 	for(i=0;i<128;i++){
 		let currentFieldId = helpMap.fields[i];
 		let currentField = document.getElementById(currentFieldId);
-		currentField.className = dungeon.map5[i];
+		currentField.className = dungeon.map7[i];
 	}
 	dungeon.doorPosition = 110;
 	const goblin4 = new Goblin(999);
@@ -965,7 +1031,7 @@ function mapBuilder5(){
 
 };
 
-function mapBuilder6(){
+function mapBuilder8(){
 
 	dungeon.monsterComingAfterYouCounter = 0;
 	dungeon.reserveMonsterList = [];
@@ -976,7 +1042,7 @@ function mapBuilder6(){
 	for(i=0;i<128;i++){
 		let currentFieldId = helpMap.fields[i];
 		let currentField = document.getElementById(currentFieldId);
-		currentField.className = dungeon.map6[i];
+		currentField.className = dungeon.map8[i];
 	}
 	dungeon.doorPosition = 125;
 	const shadow1 = new Shadow(22);
@@ -1086,9 +1152,6 @@ function reduceLife() {
 			dungeon.audio2.pause();
 			dungeon.audio3.pause();
 			dungeon.audio4.pause();
-			dungeon.audio5.pause();
-			dungeon.audio6.pause();
-			dungeon.audio7.pause();
 			dungeon.audioEndBossLich.pause();
 			document.getElementById("buttonMusic").disabled = true;
 			dungeon.audioDead.play();

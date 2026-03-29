@@ -1,0 +1,20 @@
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	l	l	l	l	l	l	l	l	l	l	l	w	w
+w	w	l	l	l	l	l	l	l	w	w	w	l	l	w	w
+w	l	l	l	l	a	l	l	l	l	d	w	l	l	w	w
+w	w	l	l	l	l	l	l	l	w	w	w	l	l	w	w
+w	w	w	l	l	l	l	l	l	l	l	l	l	l	w	w
+w	w	w	h	w	w	w	w	w	w	w	w	w	w	w	w
+
+
+
+w	w	w	w	w	w	w	w	w	w	w	w	w	d	w	w
+w	l	w	w	w	w	w	w	w	w	w	w	w	l	w	w
+w	l	l	w	w	w	w	w	w	w	w	w	l	l	w	w
+w	w	l	l	l	l	l	l	w	w	w	w	l	gr	w	w
+w	w	w	l	l	l	l	l	l	l	l	l	l	w	w	w
+w	w	w	w	w	w	w	gr	l	l	l	l	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+
+https://copilot.microsoft.com/shares/ydGrVrwzRoHTogqmfKpaV
