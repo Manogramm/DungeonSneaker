@@ -207,6 +207,22 @@ blockquote{
 	background-size: 100% 100%; 
 }
 
+
+.chess-board .blood { 
+	background: url("dungeon_floortileBlood.png");
+	background-size: 100% 100%; 
+}
+
+.chess-board .bloodEnd1 { 
+	background: url("dungeon_floortileBloodEnd1.png");
+	background-size: 100% 100%; 
+}
+
+.chess-board .bloodEnd2 { 
+	background: url("dungeon_floortileBloodEnd2.png");
+	background-size: 100% 100%; 
+}
+
 .chess-board .wall { 
 	background: url("dungeon-walltile.gif");
 	background-size: 100% 100%;
@@ -298,6 +314,22 @@ blockquote{
  
 }
 
+.chess-board .heroAttack { 
+	background: url("heroAttack.gif"); 
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+ 
+}
+
+.chess-board .heroFailedAttack { 
+	background: url("heroFailedAttack.gif"); 
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+ 
+}
+
 .chess-board .heroDark { 
 	background: url("heroDark.gif"); 
 	background-size: 100% 100%;
@@ -335,8 +367,36 @@ blockquote{
 	background-position: center;
 }
 
+.chess-board .goblinDamaged { 
+	background: url("goblinDamaged.png"); 
+	background-size: 100% 100%; 
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+
+.chess-board .goblinDodged { 
+	background: url("goblinDodged.png"); 
+	background-size: 100% 100%; 
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+
 .chess-board .lich { 
 	background: url("lich.gif"); 
+	background-size: 100% 100%; 
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+
+.chess-board .lichDodged { 
+	background: url("lichDodged.png"); 
+	background-size: 100% 100%; 
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+
+.chess-board .lichDamaged { 
+	background: url("lichDamaged.png"); 
 	background-size: 100% 100%; 
 	background-repeat: no-repeat; 
 	background-position: center;
@@ -352,6 +412,34 @@ blockquote{
 .chess-board .shadow { 
 	background: url("shadow.gif"); 
 	background-size: 100% 100%; 
+	background-repeat: repeat; 
+	background-position: center;
+}
+
+.chess-board .madness1 { 
+	background: url("madness1.png");
+	background-size: 100% 100%;
+	background-repeat: repeat; 
+	background-position: center;
+}
+
+.chess-board .madness2 { 
+	background: url("madness2.png");
+	background-size: 100% 100%;
+	background-repeat: repeat; 
+	background-position: center;
+}
+
+.chess-board .madness3 { 
+	background: url("madness3.png");
+	background-size: 100% 100%;
+	background-repeat: repeat; 
+	background-position: center;
+}
+
+.chess-board .madness4 { 
+	background: url("madness4.png");
+	background-size: 100% 100%;
 	background-repeat: repeat; 
 	background-position: center;
 }

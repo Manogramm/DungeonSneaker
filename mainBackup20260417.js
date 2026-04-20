@@ -102,13 +102,6 @@ function moveUp() {
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber -16;
-	if(dungeon.iconsAltered == true){
-		dungeon.iconsAltered = false;
-		let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-		dungeon.monsterIconAlteredFieldId = null;
-		originalMonsterField.className = dungeon.monsterIconAlteredName;
-		dungeon.monsterIconAlteredName ="x";
-	}
 					checkView();
 				}
 			}
@@ -183,13 +176,6 @@ function moveDown() {
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber +16;
-	if(dungeon.iconsAltered == true){
-		dungeon.iconsAltered = false;
-		let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-		dungeon.monsterIconAlteredFieldId = null;
-		originalMonsterField.className = dungeon.monsterIconAlteredName;
-		dungeon.monsterIconAlteredName ="x";
-	}
 					checkView();
 				}
 			}
@@ -264,13 +250,6 @@ function moveLeft() {
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber -1;
-	if(dungeon.iconsAltered == true){
-		dungeon.iconsAltered = false;
-		let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-		dungeon.monsterIconAlteredFieldId = null;
-		originalMonsterField.className = dungeon.monsterIconAlteredName;
-		dungeon.monsterIconAlteredName ="x";
-	}
 					checkView();
 				}
 			}
@@ -345,13 +324,6 @@ function moveRight() {
 					}
 					helpMap.heroPosition = heroId;
 					hero.positionNumber = hero.positionNumber +1;
-	if(dungeon.iconsAltered == true){
-		dungeon.iconsAltered = false;
-		let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-		dungeon.monsterIconAlteredFieldId = null;
-		originalMonsterField.className = dungeon.monsterIconAlteredName;
-		dungeon.monsterIconAlteredName ="x";
-	}
 					checkView();
 				}
 			}
@@ -480,9 +452,6 @@ const dungeon = {};
 
 	dungeon.view = "backgroundClean.gif";
 	dungeon.viewAltered = false;
-	dungeon.iconsAltered = false;
-	dungeon.monsterIconAlteredFieldId = null;
-	dungeon.monsterIconAlteredName = "x";
 
 //monster and dungeon Sounds
 	dungeon.audioGoblinHit = new Audio('goblin-hit.mp3');
@@ -617,9 +586,6 @@ function attack(){
 		let monsterFound = false;
 		let combatFields = combatFieldsCreator();
 		let index = 0;
-		helpMap.heroPosition = helpMap.fields[hero.positionNumber];
-		let heroId = helpMap.heroPosition;
-		let alteredField = document.getElementById(heroId);
 		for(j=0; j<dungeon.monsterList.length; j++){
 			for(i=0; i<combatFields.length; i++){
 				if(dungeon.monsterList[j].type == 1 && helpMap.fields.indexOf(combatFields[i]) == dungeon.monsterList[j].position){
@@ -646,25 +612,6 @@ function attack(){
 			let criticalHit = 0;
 			if(diceNumber == 0){
 				m.textContent = "Your attack failed miserably!";
-				let p7 = document.getElementById("view");
-				if(victim.type == 1){
-					p7.src = "missed-goblin.gif";
-				}else{
-					p7.src = "missed-goblin.gif";
-				}
-				dungeon.viewAltered = true;
-				dungeon.iconsAltered = true;
-				alteredField.className = "heroFailedAttack";
-				let monsterId = helpMap.fields[victim.position];
-				dungeon.monsterIconAlteredFieldId = monsterId;
-				let emptyEnemyField = document.getElementById(monsterId);
-				dungeon.monsterIconAlteredName = emptyEnemyField.className;
-				if(victim.type ==1){
-					emptyEnemyField.className = "goblinDodged";
-				}else{
-					emptyEnemyField.className = "lichDodged";
-					dungeon.audioLichLaugh.play();
-				}
 				hero.audioMisses.play();
 				hero.audioMisses2.play();
 			}else{
@@ -678,50 +625,12 @@ function attack(){
 					if(lifeLost < 1){
 						victim.life = victim.life - 1;
 						m.textContent = "You hit " + victim.name +  " and took 1 lifepoint";
-						let p8 = document.getElementById("view");
-						if(victim.type == 1){
-							p8.src = "damaged-goblin.gif";
-						}else{
-							p8.src = "damaged-goblin.gif";
-						}
-						dungeon.viewAltered = true;
-						dungeon.iconsAltered = true;
-						alteredField.className = "heroAttack";
-						let monsterId = helpMap.fields[victim.position];
-						dungeon.monsterIconAlteredFieldId = monsterId;
-						let emptyEnemyField = document.getElementById(monsterId);
-						dungeon.monsterIconAlteredName = emptyEnemyField.className;
-						if(victim.type ==1){
-							emptyEnemyField.className = "goblinDamaged";
-						}else{
-							emptyEnemyField.className = "lichDamaged";
-							dungeon.audioLichNecromanticFever.play();
-						}
 						hero.audioHit.play();
 						hero.audioHit2.play();
 					}else{
 						lifeLost = Math.round(lifeLost) + criticalHit;
 						victim.life = victim.life - lifeLost;
 						m.textContent = "You hit " + victim.name +  " and took " + lifeLost + " life";
-						let p9 = document.getElementById("view");
-						if(victim.type == 1){
-							p9.src = "damaged-goblin.gif";
-						}else{
-							p9.src = "damaged-goblin.gif";
-						}
-						dungeon.viewAltered = true;
-						dungeon.iconsAltered = true;
-						alteredField.className = "heroAttack";
-						let monsterId = helpMap.fields[victim.position];
-						dungeon.monsterIconAlteredFieldId = monsterId;
-						let emptyEnemyField = document.getElementById(monsterId);
-						dungeon.monsterIconAlteredName = emptyEnemyField.className;
-						if(victim.type ==1){
-							emptyEnemyField.className = "goblinDamaged";
-						}else{
-							emptyEnemyField.className = "lichDamaged";
-							dungeon.audioLichNecromanticFever.play();
-						}
 						hero.audioHit.play();
 						hero.audioHit2.play();
 						if(criticalHit == 1){
@@ -732,25 +641,6 @@ function attack(){
 					}
 				}else{
 					m.textContent = "Your attack missed!";
-					let p6 = document.getElementById("view");
-					if(victim.type == 1){
-						p6.src = "missed-goblin.gif";
-					}else{
-						p6.src = "missed-goblin.gif";
-					}
-					dungeon.viewAltered = true;
-					dungeon.iconsAltered = true;
-					alteredField.className = "heroFailedAttack";
-					let monsterId = helpMap.fields[victim.position];
-					dungeon.monsterIconAlteredFieldId = monsterId;
-					let emptyEnemyField = document.getElementById(monsterId);
-					dungeon.monsterIconAlteredName = emptyEnemyField.className;
-					if(victim.type ==1){
-						emptyEnemyField.className = "goblinDodged";
-					}else{
-						emptyEnemyField.className = "lichDodged";
-						dungeon.audioLichLaugh.play();
-					}
 					hero.audioMisses.play();
 					hero.audioMisses2.play();
 				}
@@ -777,8 +667,6 @@ function attack(){
 					music();
 				}
 				eliminate(index);
-				dungeon.monsterIconAlteredFieldId = null;
-				dungeon.monsterIconAlteredName ="x";
 			}
 			checkView();
 			dungeon.heroActions = dungeon.heroActions -1;
@@ -1681,6 +1569,9 @@ function rollDice(){
 
 
 
+
+
+
 function reduceMovement() {
 	newMovement = hero.movement -1;
 	let movement = document.getElementById("movement");
@@ -1855,7 +1746,6 @@ function checkView(){
 	dungeon.viewAltered = false;
 	let p = document.getElementById("view");
 	p.src = dungeon.view;
-
 	return;
 };
 
@@ -1944,21 +1834,6 @@ function okay(){
 		checkView();
 	}
 
-	if(dungeon.iconsAltered == true){
-		dungeon.iconsAltered = false;
-		helpMap.heroPosition = helpMap.fields[hero.positionNumber];
-		let heroId = helpMap.heroPosition;
-		let originalField = document.getElementById(heroId);
-		originalField.className = "hero";
-		if(dungeon.mapPointer == 12 || dungeon.mapPointer == 8){
-			originalField.className = "heroDark";
-		}
-		let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-		dungeon.monsterIconAlteredFieldId = null;
-		originalMonsterField.className = dungeon.monsterIconAlteredName;
-		dungeon.monsterIconAlteredName ="x";
-	}
-
 	if(dungeon.checkPoint1 == true){
 		dungeon.checkPoint1 = false;
 		monsterRoutine();
@@ -2032,22 +1907,6 @@ function endTurn(){
 		deactivateButtons();
 		dungeon.masterTurn = true;
 		dungeon.masterPause = false;
-
-		if(dungeon.iconsAltered == true){
-			dungeon.iconsAltered = false;
-			helpMap.heroPosition = helpMap.fields[hero.positionNumber];
-			let heroId = helpMap.heroPosition;
-			let originalField = document.getElementById(heroId);
-			originalField.className = "hero";
-			if(dungeon.mapPointer == 12 || dungeon.mapPointer == 8){
-				originalField.className = "heroDark";
-			}
-			let originalMonsterField = document.getElementById(dungeon.monsterIconAlteredFieldId);
-			dungeon.monsterIconAlteredFieldId = null;
-			originalMonsterField.className = dungeon.monsterIconAlteredName;
-			dungeon.monsterIconAlteredName ="x";
-		}
-
 		if(dungeon.monsterComingAfterYouCounter > 1){
 			dungeon.monsterComingAfterYouCounter = dungeon.monsterComingAfterYouCounter - 1;
 			if(dungeon.monsterComingAfterYouCounter == 1){
