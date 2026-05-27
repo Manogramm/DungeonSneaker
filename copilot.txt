@@ -17,4 +17,143 @@ w	w	w	w	w	w	w	gr	l	l	l	l	w	w	w	w
 w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
 w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
 
+
+
+w	h	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	l	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	l	l	l	l	l	l	l	l	l	l	l	gr	l	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+w	l	l	l	l	l	l	l	l	gr	l	l	l	l	l	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+
+
+
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	l	l	l	l	l	gr	l	l	l	l	l	gr	l	l	w
+h	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+w	l	l	l	l	l	l	l	l	gr	l	l	l	gr	gr	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+
+
+
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+h	l	l	l	gr	gr	gr	l	l	l	l	gr	l	l	gr	w
+w	l	l	l	l	l	l	l	gr	gr	l	l	l	gr	gr	d
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+
+
+
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+h	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	d
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+
+
+
+
 https://copilot.microsoft.com/shares/ydGrVrwzRoHTogqmfKpaV
+
+
+
+w	h	w	w	w	w	w	w	w	w	w	w	w	w	d	w
+w	l	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	l	w
+w	l	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	l	l	a
+w	l	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	l	l	w
+w	l	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	a	l	w
+w	d	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+															
+															
+w	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	w
+w	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	w
+w	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	w	w
+w	w	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	w	w	w
+w	w	w	dw	dw	dw	dw	dw	dw	dw	dw	dw	w	w	w	w
+w	w	w	w	dw	dw	dw	dw	dw	dw	dw	w	w	w	w	w
+w	w	w	d	h	da	da	da	da	da	da	d	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+															
+															
+dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw
+dw	dw	dw	w	w	w	w	w	w	w	w	w	w	w	dw	dw
+dw	dw	w	w	w	gr	w	w	gr	w	w	gr	w	w	w	dw
+dw	w	w	w	l	l	l	l	l	l	l	l	l	l	d	dw
+dw	w	h	l	l	l	l	l	l	l	l	l	l	w	w	dw
+dw	w	w	w	w	gr	w	w	gr	w	w	gr	w	w	w	dw
+dw	dw	w	w	w	w	w	w	w	w	w	w	w	w	dw	dw
+dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw
+															
+															
+w	w	w	w	h	w	d	w	w	d	w	w	w	w	w	w
+w	l	w	w	l	l	l	w	w	gr	w	w	l	a	l	w
+w	l	l	l	l	l	l	l	w	w	w	l	l	l	l	w
+w	l	l	w	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	l	w	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	w	w	w	l	l	l	l	l	l	l	w	d	w	w
+w	w	w	d	w	w	w	w	w	w	w	w	w	w	w	w
+															
+															
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	c	c	c	w	l	l	w	w
+w	h	w	w	w	w	w	w	l	l	l	w	l	l	l	w
+w	l	l	w	w	w	w	w	w	l	w	w	l	l	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	w
+w	l	l	l	l	l	l	l	l	l	l	l	l	l	l	w
+d	l	l	l	l	l	l	l	w	w	w	l	l	l	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+															
+															
+															
+dw	dw	dw	dw	dw	dw	dw	w	w	w	dw	dw	dw	dw	dw	dw
+dw	w	w	w	w	w	w	w	d	w	w	w	w	w	w	dw
+dw	w	w	w	w	w	w	w	l	w	w	w	w	w	w	dw
+dw	w	l	l	w	w	w	w	l	w	w	w	l	l	w	dw
+dw	w	c	l	l	l	l	l	l	l	l	l	l	c	w	dw
+dw	w	l	l	w	w	w	w	h	w	w	w	l	l	w	dw
+dw	w	w	w	w	w	w	w	w	w	w	w	w	w	w	dw
+dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw	dw
+															
+															
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	l	l	l	w	w	w	h	w
+w	w	w	w	w	w	w	w	l	w	l	l	w	l	l	w
+w	w	w	w	d	l	l	w	l	w	w	l	w	l	w	w
+w	w	w	w	w	w	l	w	l	l	w	l	w	l	w	w
+w	w	w	w	w	w	l	w	w	l	w	l	l	l	w	w
+w	w	w	w	w	w	l	l	l	l	w	w	w	w	w	w
+w	w	w	w	w	w	w	w	w	w	w	w	w	w	w	w
+															
+															
+w	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	gr	d	c
+d	l	l	l	l	l	l	l	l	l	l	l	l	l	a	c
+s	l	l	l	l	l	w	w	w	l	l	l	l	l	l	c
+s	l	l	a	gr	l	l	l	l	l	gr	a	l	d	l	c
+s	a	l	a	l	gr	l	h	l	gr	l	a	l	d	l	c
+s	l	l	a	gr	l	l	l	l	l	gr	a	l	d	l	c
+s	t	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+s	d	i	i	i	i	i	i	i	i	i	i	i	i	i	w
+															
+															
+d	d	d	d	d	d	d	d	d	d	d	d	d	d	d	d
+d	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+d	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+d	l	l	d	d	d	d	d	d	d	d	d	d	l	l	d
+d	l	l	d	d	d	d	d	d	d	d	d	d	l	l	d
+d	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+d	l	l	l	l	l	l	l	l	l	l	l	l	l	l	d
+d	d	d	d	d	d	d	d	d	d	d	d	d	d	d	d

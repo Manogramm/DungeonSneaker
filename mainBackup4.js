@@ -456,7 +456,6 @@ const dungeon = {};
 	dungeon.monsterOnTurn = 0; //which monster is on turn
 	dungeon.monsterActionCounter = 0; //what action as the monster on turn at right now
 	dungeon.dicePointer = 1;
-	dungeon.diceCounter = 1;
 	dungeon.start = false;
 	dungeon.intro = true;
 	dungeon.monsterComingAfterYouCounter = 0;     //if monsterReserveList is not empty when entering a new room, this counter will be set to 4
@@ -510,7 +509,7 @@ const hero = {};
 	hero.positionNumber = 2;
 	hero.movement = 6;
 	hero.maximumMovement = 6;
-	hero.life = 8;
+	hero.life = 88;
 	hero.strength = 3;
 	hero.Mana = 3;
 	hero.weapon = 4;
@@ -1137,13 +1136,13 @@ dungeon.map88 = [
 
 
 dungeon.map87 = [
-  "forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","door","forrest",
-  "door","darkWall","light","light","light","light","light","light","light","fakegoblin","fakegoblin","light","light","forrest","dark","forrest",
-  "forrest","forrest","light","light","light","light","light","light","light","light","fakegoblin","fakegoblin","light","light","light","forrest",
-  "forrest","light","light","dead","light","light","light","light","light","light","dragon11","dragon12","light","light","light","forrest",
-  "forrest","light","light","light","light","hero","light","light","fakehero","light","dragon21","dragon22","light","light","light","forrest",
-  "forrest","light","dead","light","light","light","light","light","light","light","fakegoblin","fakegoblin","light","light","forrest","forrest",
-  "forrest","darkWall","forrest","light","light","light","dead","light","light","fakegoblin","fakegoblin","light","light","light","darkWall","door", "forrest","door","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest"
+  "forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","forrest","door","chest",
+  "door","light","light","light","light","light","light","light","light","light","light","light","light","light","dark","chest",
+  "sack","light","light","light","light","light","wall","wall","wall","light","light","light","light","light","light","chest",
+  "sack","light","light","darkWall","goblin","light","light","light","light","light","gravel","altar","light","door","light","chest",
+  "sack","darkWall","light","darkWall","light","goblin","light","hero","light","gravel","light","altar","light","door","light","chest",
+  "sack","light","light","darkWall","goblin","light","light","light","light","light","gravel","altar","light","door","light","chest",
+  "sack","table","light","light","light","light","light","light","light","light","light","light","light","light","light","door", "sack","door","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate","irongate"
 ]
 
 
@@ -1556,7 +1555,7 @@ function mapBuilder88(){
 };
 
 function mapBuilder87(){
-	hero.positionNumber = 69;
+	hero.positionNumber = 71;
 	helpMap.heroPosition = helpMap.fields[hero.positionNumber];
 
 	for(i=0;i<128;i++){
@@ -1675,7 +1674,7 @@ function pushReserveList(){
 
 function rollDice(){
 	let old = dungeon.dicePointer + 1;
-	dungeon.dicePointer = (((hero.positionNumber +1 )* old ) + dungeon.diceCounter) % 999;
+	dungeon.dicePointer = ((hero.positionNumber +1 )* old )% 999;
 	let result = dice[dungeon.dicePointer] - 1;
 	return result;
 }
@@ -2456,11 +2455,10 @@ function Goblin(position) {
 
 function goblinMove() {
 	let m4 = document.getElementById("message");
-	let movingGoblinPosition = dungeon.monsterList[dungeon.monsterOnTurn -1].position;
-	let movingGoblinName = dungeon.monsterList[dungeon.monsterOnTurn -1].name;
-	let oldPosition = movingGoblinPosition;
-	let monsterId = helpMap.fields[movingGoblinPosition];
-	m4.textContent = movingGoblinName + " approached!";
+	let movingGoblin = dungeon.monsterList[dungeon.monsterOnTurn -1];
+	let oldPosition = dungeon.monsterList[dungeon.monsterOnTurn -1].position;
+	let monsterId = helpMap.fields[movingGoblin.position];
+	m4.textContent = movingGoblin.name + " approached!";
 	let oldField = document.getElementById(monsterId);
 	distance1 = calculateDistance();
 	let failureCounter = 1;	
@@ -2469,44 +2467,40 @@ function goblinMove() {
 		let obstacle = true;
 		let i = 0;
 		let newField = document.getElementById(monsterId);
-		while(obstacle == true  && failureCounter < combatFields.length){
+		while(obstacle == true  && failureCounter < 9){
 			newField = document.getElementById(combatFields[i]);
 			if (newField.className == "light"){
 				obstacle = false;
 				oldField.className = "light";
 				newField.className = "goblin";
-				movingGoblinPosition = helpMap.fields.indexOf(combatFields[i]);
-				dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblinPosition;
+				movingGoblin.position = helpMap.fields.indexOf(combatFields[i]);
+				dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblin.position;
 			}else{ 
 				i = i + 1;
 				failureCounter = failureCounter +1;
-				if(failureCounter == combatFields.length){
-					m4.textContent = movingGoblinName + " pauses.";
-				}
 			}
 		}
 	}else{
 		let obstacle = true;
 		while (obstacle == true && failureCounter < 128){
 			let time = Date.now();
-			let randomMovementNumber = Math.round(time/1234) * (movingGoblinPosition+1+failureCounter) % 127;
+			let randomMovementNumber = time * (movingGoblin.position+1) % 127;
 			let randomFieldId = helpMap.fields[randomMovementNumber];
 			let randomField = document.getElementById(randomFieldId);
-			dungeon.monsterList[dungeon.monsterOnTurn -1].position = randomMovementNumber;
+			movingGoblin.position = randomMovementNumber;
 			distance2 = calculateDistance();
-			dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblinPosition;
 			if(randomField.className == "light" && distance2 > 4 && distance2 < 8){
 				obstacle = false;
 				oldField.className = "light";
 				randomField.className = "goblin";
-				dungeon.monsterList[dungeon.monsterOnTurn -1].position = randomMovementNumber;
+				dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblin.position;
 			}else{ 
 				failureCounter = failureCounter +1;
 			}
 		}
 	}
 	if(oldPosition == dungeon.monsterList[dungeon.monsterOnTurn -1].position){
-		m4.textContent = movingGoblinName + " pauses.";
+		m4.textContent = movingGoblin.name + " pauses.";
 	}
 }
 
@@ -2755,10 +2749,10 @@ function lichAttack(){
 					failureCounter = failureCounter +1;
 				}
 			}
+			oldField.className = "light";
+			randomField.className = "hero";
 			if(failureCounter > 127){
 			}else{
-				oldField.className = "light";
-				randomField.className = "hero";
 				m.textContent = attacker.name + " used telekinesis on you! -1 life";
 				let p5 = document.getElementById("view");
 				p5.src = "lich-image-bnwTelekinesis.gif";
@@ -2838,10 +2832,9 @@ function GoblinArcher(position) {
 
 function goblinArcherMove() {
 	let m4 = document.getElementById("message");	
-	let movingGoblinPosition = dungeon.monsterList[dungeon.monsterOnTurn -1].position;
-	let movingGoblinName = dungeon.monsterList[dungeon.monsterOnTurn -1].name;
-	let monsterId = helpMap.fields[movingGoblinPosition];
-	m4.textContent = movingGoblinName + " gets into position to shoot!";
+	let movingGoblin = dungeon.monsterList[dungeon.monsterOnTurn -1];
+	let monsterId = helpMap.fields[movingGoblin.position];
+	m4.textContent = movingGoblin.name + " gets into position to shoot!";
 	let oldField = document.getElementById(monsterId);
 	distance1 = calculateDistance();
 	if (distance1 > 8 || distance1 < 3){
@@ -2850,24 +2843,23 @@ function goblinArcherMove() {
 		let failureCounter = 1;
 		while (obstacle == true  && failureCounter < 128){
 			let time = Date.now();
-			let randomMovementNumber = Math.round(time/1234) * (movingGoblinPosition+1+failureCounter) % 127;
+			let randomMovementNumber = time * (movingGoblin.position+1) % 127;
 			let randomFieldId = helpMap.fields[randomMovementNumber];
 			let randomField = document.getElementById(randomFieldId);
-			dungeon.monsterList[dungeon.monsterOnTurn -1].position = randomMovementNumber;
+			movingGoblin.position = randomMovementNumber;
 			distance2 = calculateDistance();
-			dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblinPosition; 
 			if(randomField.className == "light" && distance2 > 4 && distance2 < 8){
 				obstacle = false;
 				oldField.className = "light";
 				randomField.className = "goblinArcher";
-				dungeon.monsterList[dungeon.monsterOnTurn -1].position = randomMovementNumber;
+				dungeon.monsterList[dungeon.monsterOnTurn -1].position = movingGoblin.position;
 				
 			}else{ 
 				failureCounter = failureCounter+1;
 			}
 		}
 	}else{
-		m4.textContent = movingGoblinName + " is aiming at you!";		
+		m4.textContent = movingGoblin.name + " is aiming at you!";		
 	}
 
 }

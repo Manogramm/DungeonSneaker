@@ -472,6 +472,26 @@ blockquote{
 
 }
 
+.chess-board .fakegoblin { 
+	background: url("fakegoblin.png"); 
+	background-size: 100%; 
+	background-repeat: no-repeat; 
+
+}
+
+.chess-board .fakehero { 
+	background: url("fakehero.png"); 
+	background-size: 100%; 
+	background-repeat: no-repeat; 
+
+}
+
+.chess-board .witch { 
+	background: url("witch.png"); 
+	background-size: 100%; 
+	background-repeat: no-repeat; 
+
+}
 
 
 
