@@ -489,7 +489,7 @@ blockquote{
 .chess-board .witch { 
 	background: url("witch.png"); 
 	background-size: 100%; 
-	background-repeat: no-repeat; 
+	background-repeat: repeat; 
 
 }
 

@@ -510,7 +510,7 @@ const hero = {};
 	hero.positionNumber = 2;
 	hero.movement = 6;
 	hero.maximumMovement = 6;
-	hero.life = 8;
+	hero.life = 16;
 	hero.strength = 3;
 	hero.Mana = 3;
 	hero.weapon = 4;
@@ -862,14 +862,15 @@ function door(){
 			case 7:
 			mapBuilder8();
 			dungeon.mapPointer = 8;
+            dungeon.view = "backgroundDragon.gif";
 			let p5 = document.getElementById("view");
 			p5.src = "backgroundDragon.gif";
-			checkView();
 			break;
 			
 			case 8:
 			mapBuilder9();
 			dungeon.mapPointer = 9;
+            dungeon.view = "backgroundClean.gif";
 			checkView();
 			break;
 
@@ -902,6 +903,7 @@ function door(){
 			case 86:
 			mapBuilder7();
 			dungeon.mapPointer = 7;
+            dungeon.view = "backgroundClean.gif";
 			checkView();
 			break;
 
@@ -962,7 +964,9 @@ function secretDoor(){
 			case 88:
 			mapBuilder87();
 			dungeon.mapPointer = 87;
-			checkView();
+			dungeon.view = "backgroundWitch.gif";
+			let p7 = document.getElementById("view");
+			p7.src = "backgroundWitch.gif";
 			break;
 
 			case 87:
@@ -1154,8 +1158,8 @@ dungeon.map86 = [
   "door","light","light","door","door","door","door","door","door","door","door","door","door","light","light","door",
   "door","light","light","door","door","door","door","door","door","door","door","door","door","light","light","door",
   "door","light","light","light","light","light","light","light","light","light","light","light","light","light","light","door",
-  "door","door","light","light","light","light","light","light","light","light","light","light","light","light","light","door",
-  "witch","door","door","door","door","door","door","door","door","door","door","door","door","door","door","door"
+  "door","witch","light","light","light","light","light","light","light","light","light","light","light","light","light","door",
+  "door","door","door","door","door","door","door","door","door","door","door","door","door","door","door","door"
 ]
 
 
@@ -1784,6 +1788,10 @@ function reduceMana(amount) {
 
 
 function checkView(){
+
+    if(dungeon.mapPointer == 87 || dungeon.mapPointer == 86 || dungeon.mapPointer == 8){
+        return;
+    }
 
 	let u = "light";
 	let r = "light";
